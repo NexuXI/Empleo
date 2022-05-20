@@ -1,3 +1,4 @@
+drop database if exists empleo;
 
 create database if not exists empleo;
 use empleo;
@@ -7,7 +8,8 @@ create table if not exists candidatos(
     nombre varchar(100) not null, 
     apellidos varchar(255) not null,
     tlf varchar(25) not null,
-    email varchar(255) not null,
+    puntos int,
+    email varchar(255) not null unique,
     clave varchar(255) not null,
     imagen varchar(255),
     curriculum varchar(255),
@@ -41,7 +43,7 @@ create table if not exists Empresa(
     nombre varchar(255) not null,
     direccion varchar(255),
     tlf varchar(25) not null, 
-    email varchar(255) not null,
+    email varchar(255) not null unique,
     activo int default 0,
     hash varchar(32),
     clave varchar(255) not null,
@@ -59,7 +61,8 @@ create table if not exists CandidaturasCandidato(
         "aprobado",
         "rechazado"
     ),
-    fechaCandidatura date
+    fechaCandidatura date, 
+    puntosUser int
 );
 
 
@@ -100,5 +103,3 @@ create table if not exists OfertasEmpleo(
     fecha date,
     constraint foreign key(idEmpresa) references Empresa (id)
 );
-
-select * from candidatos;
